@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="box">
+        <!-- fetch 和 axios
+            fetch w3c的标准
+         -->
+         <button @click="handleClick()">点击获取影片信息</button>
+         <ul>
+             <li v-for="data in dataList">{{data}}</li>
+         </ul>
+    </div>
+    <script >
+        var vm = new Vue({
+            el:"#box",
+            data() {
+                return {
+                    dataList:["111","222","3333"]
+                }
+            },
+            methods: {
+                handleClick() {
+                    // fetch('./json/test.json').then(res=>res.json()).then(res=>{
+                    //     console.log(res,"000")
+                    // })
+                    axios.get('./json/test.json').then(res=>{
+                        console.log(res.data.data.films);
+                    }).catch(err=>{
+                        console.log(err);
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+</html>
+<!-- vue基础三01 -->

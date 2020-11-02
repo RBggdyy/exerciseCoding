@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <!-- .lazy 失去焦点，节省资源 -->
+       <input type="text"  v-model.lazy="mytext"/> {{mytext}}
+        <!-- .number  可以将输入的数字后面的字母等，在失去焦点的时候去掉，但是纯输入字母就在失去焦点的时候去不掉  看似很有用其实很鸡肋 -->
+       <input type="text"  v-model.number="mynumber"/> {{mynumber}}
+        <!-- .trim去掉首尾的空格，输入的控件里还是可以看到空格，但是接收的变量就去掉空格了 -->
+       <input type="text"  v-model.trim="myUserName"/> |{{myUserName}}|
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#box",
+            data() {
+                return {
+                    mytext:"",
+                    mynumber:0,
+                    myUserName:""
+                }
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+</html>

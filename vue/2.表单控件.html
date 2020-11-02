@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input type="text" v-model="mytext"/>
+        <span>{{mytext}}</span>
+        <textarea  v-model="mytext"></textarea>
+        <span>{{mytext}}</span>
+        <br/>
+        <input type="checkbox"  v-model="isCheck" />记录用户名
+        <br/>
+
+        <p>你喜欢的运动：
+            <template  v-for="item in list" >
+                <input type="checkbox" v-model="checkGroup" :value="item.value" :key="item.id"/>{{item.label}}
+            </template>
+            <!-- <input type="checkbox" v-model="checkGroup" value="bb"//>bb
+            <input type="checkbox" v-model="checkGroup" value="cc"//>cc
+            <input type="checkbox" v-model="checkGroup" value="dd"//>dd -->
+        </p>
+        <p>你喜欢的语言：
+            <template  v-for="item in arr" >
+                <input type="radio" v-model="radioGroup" :value="item.value" :key="item.id"/>{{item.label}}
+            </template>
+        </p>
+        {{checkGroup}}
+        <br/>
+        {{radioGroup}}
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#box",
+            data:{
+                mytext:"",
+                isCheck:false,
+                checkGroup:[],
+                radioGroup:"",
+                list:[
+                    {id:1,value:"aa",label:"aa"},
+                    {id:2,value:"bb",label:"bb"},
+                    {id:3,value:"cc",label:"cc"},
+                    {id:4,value:"dd",label:"dd"},
+                ],
+                arr:[
+                    {id:1,value:"js",label:"js"},
+                    {id:2,value:"java",label:"java"},
+                    {id:3,value:"php",label:"php"},
+                ],
+            },
+            methods:{
+
+            }
+        })
+    </script>
+</body>
+</html>

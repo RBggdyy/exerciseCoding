@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="checkbox" v-model="isAllCheck" @change="allCheckFunc">
+        <ul>
+            <li v-for="item in list " :key="item.id">
+                <input type="checkbox" v-model="checkGroup" :value="item" @change="handleChange">
+                {{item}}
+                <!-- -- -->
+                <button @click="delClick(item)">del</button> <!-- 点击按钮后 数字加，并且金额也要重新计算 -->
+                {{item.number}}
+                <button @click="item.number++">add</button>
+                <!-- ++ -->
+            </li>
+        </ul>
+        {{checkGroup}}
+        <p>总金额计算:{{getSum()}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#box",
+            data:{
+                list:[
+                    {
+                        name:"商品1",
+                        price:10,
+                        number:1,
+                        id:1
+                    },
+                    {
+                        name:"商品2",
+                        price:20,
+                        number:2,
+                        id:2
+                    },
+                    {
+                        name:"商品3",
+                        price:30,
+                        number:3,
+                        id:3
+                    }
+                ],
+                checkGroup:[],
+                isAllCheck:false,
+            },
+            methods:{
+                // 核心思想改变数据
+                getSum() {
+                    // 函数计算中的状态改变以后，函数会自动计算一遍
+                    let sum = 0;
+                    for(let i in this.checkGroup) {
+                        sum+= this.checkGroup[i].number*this.checkGroup[i].price;
+                    }
+                    return sum
+                },
+                allCheckFunc() {
+                    this.isAllCheck == true ?  this.checkGroup = this.list :  this.checkGroup = [];
+                },
+                handleChange() {
+                    // 判断是不是都勾选或者有一个未勾选
+                    if(this.checkGroup.length == this.list.length) {
+                        this.isAllCheck = true
+                    }
+                    else {
+                        this.isAllCheck = false
+                    }
+                },
+                delClick(data) {
+                    let number = data.number--;
+                   if(number === 1) {
+                       data.number = 1;
+                   }
+                },
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <!-- 模糊查询 -->
+        <!-- <input type="text" @input="inputFunc()" v-model="mytext"/>
+        <ul>
+            <li v-for="(data,index) in dataList" >{{data}}</li>
+       </ul> -->
+       <!-- computed改写 -->
+        <input type="text" v-model="mytext"/>
+        <ul>
+           <li v-for="(data,index) in getMyDataList" >{{data}}</li>
+        </ul>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#box",
+            data() {
+                return {
+                    mytext:"",
+                    dataList:["aaa","bbb","ccc","ddd","add","cee","eee","a666"],
+                    list:["aaa","bbb","ccc","ddd","add","cee","eee","a666"],
+                }
+            },
+            computed: {
+                getMyDataList() {
+                    // computed改写 filter不改写原数组
+                  return this.dataList.filter(item=>item.indexOf(this.mytext)>-1);
+                },
+            },
+            methods: {
+                // inputFunc() {
+                        // console.log(this.mytext,);
+                        // dataList:["aa","bb","cc","bdd","ee","ff","gg","a666"],
+                        //利用输入的字符，过滤出包含字段的元素
+                        // filter
+                        // let newList = this.list.filter(item=>item.indexOf(this.mytext)>-1)
+                        // this.dataList = newList
+                        // console.log(newList,"newList");
+                        // 计算属性也可实现
+                        // filter concat map 等
+                // },
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style>
+        .navbar{
+            background-color: brown;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <!-- <button @click="methodA"></button> -->
+        <navbar/>
+    </div>
+    <script type="text/javascript">
+        // 全局组件 作用域高
+        Vue.component('navbar',{
+            template:`
+                <div>
+                    <button @click="handleback()">返回</button>
+                    navbar
+                    <button>主页</button>
+                </div>
+            `,
+            methods: {
+                handleback() {
+                    console.log('back')
+                },
+            },
+        })
+
+         new Vue({
+            el:"#box",
+        })
+    </script>
+</body>
+</html>

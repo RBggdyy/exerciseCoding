@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+     <title>Examples</title>
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <link href="" rel="stylesheet">
+     <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+   <div id="box">
+        <!-- {{ 10+20 }}
+        <p>{{myname}}</p> -->
+        <!-- display:none -->
+        <!-- <div v-html="myhtml" v-show="isShow"></div>   -->
+        <!-- 销毁 -->
+        <!-- <div v-html="myhtml" v-if="isCreated"></div> -->
+        <!--动态操作class 三种 写法 三目  对象 数组  -->
+        <!-- <div :class="isActive?'red':'yellow'" @click="handleClick">变色</div>
+        <div :class="classObj" @click="handleClick">变色</div>
+        <div :class="classArr" @click="handleClick">变色</div> -->
+        <!-- 动态绑定样式写法 -->
+        <!-- <div :style="'background:'+(isActive?'red':'yellow')" @click="handleClick">动态绑定样式写法</div>
+        <div :style="styleObj" @click="handleClick">动态绑定样式-对象-写法</div>
+        <div :style="styleArr" @click="handleClick">动态绑定样式-数组-写法</div> -->
+          <!-- <button @click="handleClick">点我</button> -->
+          <!-- <div v-if="isActive">动态创建和删除</div> -->
+          <!-- <div v-else>111</div> -->
+          <!-- v-if="isActive" -->
+          <!-- <ul v-if="dataList.length">
+               <li v-for="data in dataList">{{data}}</li>
+          </ul>
+          <div v-else>
+               看我俩手空空
+          </div> -->
+
+          <!-- <ul>
+               <li v-for="(data,index) in obj">{{data}}==={{index}}</li>
+          </ul> -->
+          <!-- <ul>
+               <li v-for="(data,index) of obj" key="data.id">{{data}}==={{index}}</li>
+          </ul> -->
+
+          <!-- 模糊查询 -->
+          <input type="text" @input="inputFunc()" v-model="mytext"/>
+           <ul>
+               <li v-for="(data,index) in dataList" >{{data}}</li>
+          </ul>
+
+
+          <!-- 事件处理 3种-->
+          <button @click="handleClick">点我</button>
+          <button @click="handleClick()">点我2</button>
+          <button @click="isActive = !isActive">点我444</button>
+          <div v-if="isActive">11111111</div>
+
+
+          <!-- self 自己检查如果点ul的时候才会触发 -->
+          <ul @click.self="handleUlClick">
+               <!-- 原生的方法 -->
+               <!-- <li v-for="(data,index) in obj" @click="handleLiClick($event)">{{data}}</li> -->
+               <!-- vue的方法 -->
+               <li v-for="(data,index) in obj" @click.stop="handleLiClick">{{data}}</li>
+               <li  @click="handleLiClick()">2222</li>
+               <li  @click.once="handleLiClick()">333333</li><!--执行一次就解绑了  -->
+          </ul>
+          <!-- 阻止默认行为 -->
+          <!-- <a href="https://www.baidu.com/" @click="handleAClick($event)">跳跳跳</a> -->
+          <a href="https://www.baidu.com/" @click.prevent="handleAClick">跳跳跳</a>
+
+          <!-- 按键修饰符很多 -->
+          <!-- <input type="text" @keyup="handleKeyup($event)"> -->
+          <!-- 知道键盘的字母的键值 @keyup.键值 -->
+          <input type="text" @keyup.enter="handleKeyup($event)">
+
+
+          <!--表单控制-->
+          
+     </div>
+     <script>
+     var vm = new Vue({
+          el:"#box",
+          data:{
+               myname:"3333",
+               myhtml:"<span>000000</span>",
+               isShow:true,
+               isCreated:true,
+               isActive:true,
+               classObj:{
+                    red:true,
+                    yellow:true,
+               },
+               classArr:["a","b"],
+               styleObj:{
+                    background:"red",
+               },
+               styleArr:[],
+               dataList:["aaa","bbb","ccc","ddd","add","cee","eee","a666"],
+               list:["aaa","bbb","ccc","ddd","add","cee","eee","a666"],
+               obj:{
+                    name:"yyyy",
+                    age:108,
+                    loaction:"dadadadadad"
+               },
+               mytext:""
+          },
+               methods: {
+                    handleClick() {
+                         this.isActive = !this.isActive
+                         this.dataList = ["333","55","666"]
+                    },
+                    inputFunc() {
+                         console.log(this.mytext,);
+                         // dataList:["aa","bb","cc","bdd","ee","ff","gg","a666"],
+                         //利用输入的字符，过滤出包含字段的元素
+                         // filter
+                         let newList = this.list.filter(item=>item.indexOf(this.mytext)>-1)
+                         this.dataList = newList
+                         console.log(newList,"newList");
+                         // 计算属性也可实现
+                         // filter concat map 等
+                    },
+                    /*
+                    * 冒泡 先捕获，在冒泡到父元素，到windows
+                    */
+                    handleUlClick() {
+                         console.log("ul");
+                    },
+                    handleLiClick(e) {
+                         // e.stopPropagation();//原生的方法
+                         console.log(e);
+                    },// 冒泡
+                    handleAClick(e) {
+                         // e.preventDefault();//原生的方法
+                         console.log("阻止默认行为")
+                    },
+                    handleKeyup(e) {
+                         // console.log(e)
+                         // if(e.keyCode == 13) {
+                         //      alert(1)
+                         // }
+                              alert(1)
+
+                    },
+
+          },
+     })
+   </script>
+</body>
+</html>
+<style>
+     .red{
+          color:red;
+     }
+     .yellow{
+          color:green;
+     }
+</style>

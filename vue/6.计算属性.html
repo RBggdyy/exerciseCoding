@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <!-- 方式1：先截出要变得，在拼上不变的 -->
+        {{myName.substring(0,1).toUpperCase() + myName.substring(1)}}
+        <!-- 方式2： -->
+        <p> 计算属性：{{getMyName}}</p>
+        <p> 普通属性：{{getMyNameFunc()}}</p>
+            <!-- 区别 -->
+        <div>
+            <p> 计算属性：{{getMyName}}</p>
+            <p> 普通属性：{{getMyNameFunc()}}</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:"#box",
+            data() {
+                return {
+                    myName:"dami"
+                }
+            },
+            computed: {
+                // 计算属性定义起来像一个函数一样，在Dom中是使用起来像data中定义的的属性一样，例如方式2
+                // 依赖的状态改变了，计算属性会重现计算一遍
+                // 计算属性和方法比：计算属性会缓存，只调用一次，方法会多次调用 例子：区别
+                getMyName() {
+                    return this.myName.substring(0,1).toUpperCase() + this.myName.substring(1);
+                },
+            },
+            methods: {
+                getMyNameFunc(){
+                    return this.myName.substring(0,1).toUpperCase() + this.myName.substring(1);
+                },
+            },
+        });
+    </script>
+</body>
+</html>
