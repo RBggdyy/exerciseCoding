@@ -14,27 +14,53 @@
 
 <body>
     <div id="box">
-        <!-- <button @click="methodA"></button> -->
-        <navbar/>
+        <navbar></navbar>
+        <siderbar></siderbar>
     </div>
     <script type="text/javascript">
         // 全局组件 作用域高
         Vue.component('navbar',{
             template:`
-                <div>
+                <div style="background-color:yellow;">
                     <button @click="handleback()">返回</button>
-                    navbar
+                    navbar=={{navberName}}
                     <button>主页</button>
+                    <child/>
+                    <navbarchild/>
                 </div>
             `,
             methods: {
                 handleback() {
-                    console.log('back')
+                    console.log('back');
                 },
             },
+            data() {
+                return {
+                    navberName:"ddddd"
+                }
+            },
+            // 局部子组件 只能在navbar 中使用
+            components:{
+                navbarchild:{
+                    template:`<div style="background-color:yellow;">navbarchild组件--只能在navbar中使用</div>`,
+                }
+            }
+        })
+        // 全局子组件
+        Vue.component('child',{
+            template:`<div style="background-color:yellow;">child组件</div>`,
         })
 
-         new Vue({
+        Vue.component('siderbar',{
+            template:`
+                <div style="background-color:red;">
+                    兄弟组件
+                    <child/>
+                </div>
+            `,
+        })
+     
+        new Vue({
             el:"#box",
         })
     </script>

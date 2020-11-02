@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+      <!-- <button @click="isShow=!isShow">click</button>
+      <siderbar  v-show="isShow"></siderbar> -->
+      <button myevent ="handleEvent">click</button>
+      <siderbar  v-show="isShow"></siderbar>
+    </div>
+    <script>
+        Vue.component('navbar',{
+            template:`
+                <div style="background-color:yellow;">
+                    <button @click="handleback()">navbarbutton</button>
+                </div>
+            `,
+            // props:["myname","myshow"],//接受父组件传来的属性
+            // 属性验证
+            props:{
+                myname:String,
+                myshow:Boolean,
+            },
+            methods: {
+                handleback(){
+                    this.$emit("handleEvent")
+                },
+            },
+            data() {
+                return {
+                }
+            },
+        })
+        Vue.component("siderbar",{
+            template:`
+                <div style="background-color:yellow;width:200px;">
+                  <ul>
+                    <li>111</li>
+                    <li>222</li>
+                    <li>333</li>
+                    <li>444</li>
+                  </ul>
+                </div>
+            `,
+        });
+        var vm = new Vue({
+            el:"#box",
+            data() {
+                return {
+                    isShow:false
+                }
+            },
+            methods: {
+                handleEvent(){
+                    this.isShow=!this.isShow
+                },
+            },
+            computed: {},
+        });
+    </script>
+</body>
+</html>
+<!-- 033课 -->
