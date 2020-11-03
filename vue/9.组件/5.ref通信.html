@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <!-- 1 -->
+        <input type="text" ref="mytext">
+        <button @click="handleAdd">click</button>
+        <!-- 2 -->
+        <child ref="mychild"></child>
+        <button @click="handleAdd1">click2</button>
+
+    </div>
+    <script>
+        // 2
+        Vue.component("child",{
+            template:`
+                <div>
+                    child
+                </div>
+            `,
+            data(){
+                return{
+                    childname:"子组件的状态"
+                }
+            },
+            methods:{
+                add(data) {
+                    console.log("子组件的方法");
+                    console.log(data,"8888");
+                },
+            }
+        })
+        var vm = new Vue({
+            el:"#box",
+            data() {
+                return {
+                    mytext:""
+                }
+            },
+            methods: {
+                // <!-- 1 -->
+                handleAdd(){
+                    // console.log(this,"mytext");//原生的dOM节点
+                    // console.log(this.$refs.mytext,"mytext");//原生的dOM节点
+                    console.log(this.$refs.mytext.value,"mytext");//拿到里面的value值
+                },
+                handleAdd1(){
+                    // this.$refs 拿到 input 和 子组件的绑定的值 .那个就取那个
+                    console.log(this.$refs.mychild.childname,"mytext");//拿到里面的value值
+                    console.log(this.$refs.mychild,"mytext");//拿到里面的value值
+                    this.$refs.mychild.add("haizi ");//调用子组件的方法，以及父组件给子组件传数据，子组件接收  data,8888
+                },
+            },
+        });
+        /*
+         1.ref放在标签上，拿到的是原生节点
+         2.ref放在组件上，拿到的是组件对象（可以实现父子通信）
+        */
+    </script>
+</body>
+</html>
+<!-- 033课 -->

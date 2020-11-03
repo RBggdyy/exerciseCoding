@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <!-- 1 -->
+        <!-- <child>
+            <div>aaaa</div>
+        </child>
+        <swiper>
+            <li v-for="data in dataList">{{data}}</li>
+        </swiper> -->
+
+
+        <!-- 2 具名slot -->
+        <child>
+            <slot slot="a">aaaaa</slot>
+            <slot slot="b">bbbb</slot>
+        </child>
+        <swiper>
+            <li v-for="data in dataList">{{data}}</li>
+        </swiper>
+    </div>
+    <script>
+        Vue.component("child",{
+            template:`
+                <div>
+                    <slot name="a"></slot>
+                    child
+                    <slot name="b"></slot>
+
+                </div>
+            `,
+        })
+
+        Vue.component("swiper",{
+            template:`
+                <div>
+                    <ul>
+                        <slot></slot>
+                    </ul>
+                </div>
+            `,
+        })
+        var vm = new Vue({
+            el:"#box",
+            data() {
+                return {
+                    dataList:["111","222","333"]
+                }
+            },
+            methods: {
+
+            },
+        });
+        /*
+        */
+    </script>
+</body>
+</html>
+<!-- -->

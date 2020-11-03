@@ -10,7 +10,9 @@
     <div id="box">
       <!-- <button @click="isShow=!isShow">click</button>
       <siderbar  v-show="isShow"></siderbar> -->
-      <navbar @myevent ="handleEvent">click</navbar>
+      <navbar >
+        <button @click="isShow=!isShow">navbarbutton</button>
+      </navbar>
       <siderbar  v-show="isShow"></siderbar>
     </div>
     <script>
@@ -18,24 +20,9 @@
             template:`
                 <div style="background-color:yellow;">
                     navbarbutton
-                    <button @click="handleback()">navbarbutton</button>
+                    <slot></slot>
                 </div>
             `,
-            // props:["myname","myshow"],//接受父组件传来的属性
-            // 属性验证
-            props:{
-                myname:String,
-                myshow:Boolean,
-            },
-            methods: {
-                handleback(){
-                    this.$emit("myevent")
-                },
-            },
-            data() {
-                return {
-                }
-            },
         })
         Vue.component("siderbar",{
             template:`
@@ -56,12 +43,6 @@
                     isShow:false
                 }
             },
-            methods: {
-                handleEvent(){
-                    this.isShow=!this.isShow
-                },
-            },
-            computed: {},
         });
     </script>
 </body>

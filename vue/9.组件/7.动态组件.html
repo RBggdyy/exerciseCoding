@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <!-- <home></home>
+        <list></list>
+        <shopcar></shopcar> -->
+        <keep-alive>
+            <component :is="who"></component>
+        </keep-alive>
+       <footer>
+           <ul>
+                <li><a @click="who='home'">首页</a></li>
+                <li><a @click="who='list'">列表页</a></li>
+                <li><a @click="who='shopcar'">购物车页面</a></li>
+           </ul>
+       </footer>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#box",
+            data() {
+                return {
+                    who:"home"
+                }
+            },
+            components:{
+                "home":{
+                    template:`<div>home<input type="text" ref="mytext"></div>`
+                },
+                "list":{
+                    template:`<div>list</div>`
+                },
+                "shopcar":{
+                    template:`<div>shopcar</div>`
+                },
+            }
+        });
+    </script>
+</body>
+</html>
+<!-- 动态组件
+    <component>元素，动态的绑定多个组件到他的is属性
+        is切换将DOM 删掉
+
+    <keep-alive>保留状态，避免重新渲染
+
+
+
+
+
+
+
+
+
+
+-->

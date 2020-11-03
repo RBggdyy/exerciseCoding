@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <weixinauthor></weixinauthor>
+        <weixinuser></weixinuser>
+
+    </div>
+    <script>
+
+        var bus = new Vue(); //空的vue 实例赋值给一个变量
+        Vue.component("weixinauthor",{
+            template:`
+                <div style="background:blue;">
+                    我是一个微信公众号作者
+                    <input type="text" ref="mytext"/>
+                    <button @click="handleClick">发布</button>
+                </div>
+            `,
+            methods:{
+                handleClick(){
+                    bus.$emit("weixinmessage",this.$refs.mytext.value);
+                },
+            }
+
+        })
+        Vue.component("weixinuser",{
+            // 合适位置先订阅好 bus.$on
+            template:`
+                <div style="background:yellow;">
+                  我是一个微信用户
+                </div>
+            `,
+            mounted() {
+                bus.$on("weixinmessage",(data)=>{
+                    console.log("收到推送",data)
+                })
+                console.log("生命周期函数-当前组件的dom创建完成之后 就会调用");
+            },
+        })
+        var vm = new Vue({
+            el:"#box",
+            data() {
+                return {
+                }
+            },
+            methods: {
+            },
+        });
+    </script>
+</body>
+</html>
+<!-- 事件总件-->
+<!--
+    * 相当于 订阅的公众号 我 和 作者
+     我 $on
+     作者 $emit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ -->
