@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../swiper/css/swiper.css">
+    <script src="../swiper/js/swiper.js"></script>
+    <script src="../vue.js"></script>
+    <style>
+        .swiper-container{
+            height:300px;
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div class="swiper-container a">
+            <div class="swiper-wrapper">
+                <div class="swiper-slider" v-for="(data,index) in dataList"  v-swipe="{index:index,length:dataList.length}">{{data}}</div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <!-- 如果需要滚动条 -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+    Vue.directive("swipe",{
+        inserted(el,bind) {
+            // console.log(el,bind);
+            console.log(bind.value);
+
+            // if(最后一个节点上树（bind.value ==数组长度-1）) {
+            //     初始化
+            // }
+            if(bind.value.index == bind.value.length - 1){
+                new Swiper ('.a',{
+                    // direction: 'vertical'
+                    loop:true,
+                        // 如果需要分页器
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+
+                    autoplay: {
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    },
+
+
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                })
+            }
+        },
+    })
+    new Vue({
+        el:"#box",
+        data() {
+            return {
+                dataList:[],
+            }
+        },
+        mounted() {
+            setTimeout(()=>{
+                console.log("root=mounted");
+                this.dataList = ["111","222","3333"];
+            },2000)
+        },
+    })
+
+
+</script>
+
+<!-- 指令封装swiper思想
+    不知道节点什么时候可以创造完，所以初始化swiper的时候会导致swiper初始化过早的问题，
+    数据赋值完，不代表节点创建完
+
+    *指令的特点:能够准确的知道什么时候能插入到节点中
+
+
+
+
+-->

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+      <ul>
+        <li v-for="data in datalist" :key="data.filmId">
+          <h3>{{data.name}}</h3>
+          <img :src="data.poster"/>
+        </li>
+      </ul>
+      <child v-if="isCreated"></child>
+    </div>
+
+    <script type="text/javascript">
+
+      Vue.component("child",{
+        template:`<div id="aaa">
+             child --{{title}}
+            <button @click="title='1111111'">change1</button>
+            <button @click="title='2222222'">change2</button>
+        </div>`,
+
+        data(){
+          return {
+            title:"00000",
+            datalist:[],
+            count:0
+          }
+        },
+
+        methods:{
+        },
+
+        beforeCreate(){
+            // 1
+          console.log("beforeCreate")
+        },
+        created(){
+            // 1
+          console.log("created")
+        },
+
+        beforeMount(){
+            // 1
+          console.log("beforeMount")
+        },
+
+        mounted(){
+            // 1
+          console.log("mounted","访问dom,setInterval,window.onscroll, 监听事件 ajax")
+        },
+
+        beforeUpdate(){
+            // 组件内部的状态改变了               2
+          console.log("beforeUpdate")
+        },
+
+        updated(){
+             // 组件内部的状态改变了             2
+          console.log("updated","更新之后可以访问dom")
+        },
+
+        beforeDestroy(){
+            // 清除定时器
+          console.log("beforeDestroy-clearInterval ,window.onscroll=null,$off");
+        },
+
+        destroyed(){
+            // 清除定时器
+          console.log("destroyed--clearInterval ,window.onscroll=null,$off")
+        }
+
+      })
+
+
+      var vm = new Vue({
+        el: "#box",
+        data:{
+          isCreated:true,
+          datalist:[]
+        },
+
+        mounted(){
+          axios.get("json/test.json").then(res=>{
+            console.log(res.data);
+            this.datalist =res.data.data.films
+          })
+        }
+      })
+
+      // vm.$mount("#box")
+
+     //
+     //  vue组件 生命周期 ?
+     //  vue组件的 钩子函数？
+     //  vue组件的生命周期钩子函数？
+    </script>
+</body>
+</html>
+<!-- *生命周期
+    1.beforeCreate
+    2.created
+    3.beforeMount
+    4.mounted
+    5.beforeUpdate
+    6.updated
+    7.beforeDestroy
+    8.destroyed
+
+    1.2 组件初始化的时候 被拦截 注入 函数被初始化
+    3.挂载前
+    4.发ajax
+
+ -->

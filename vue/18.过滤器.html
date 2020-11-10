@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="data in dataList" :key="data.id">
+                <h3>data.nm</h3>
+                <!-- <img :src="changePath(data.img)" alt=""> -->
+                <img :src="data.img | yypatch" alt="">
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        Vue.filter('yypatch',function(data){
+            return data.replace("w.h",'120.180')
+        })
+        new Vue({
+            el:"#box",
+            data() {
+                return {
+                    dataList:[],
+                    data:[]
+                }
+            },
+            mounted() {
+                axios.get('text.json')
+                .then(function (res) {
+                    console.log("返回结果==>",res.data.data);
+                    this.dataList = res.data.movieList
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            methods: {
+                changePath(path){
+                    // 1
+                    // return path.replace("w.h",'120.180')
+                    // 2过滤器
+                },
+            },
+        })
+    </script>
+</body>
+</html>
+<!-- 过滤器就是做格式化转化的概念
+    通过| 送到| 后面的定义的过滤器中
+    vue 将原始数据送到过滤器里面，最后过滤器会返回处理完后的数据
+
+-->

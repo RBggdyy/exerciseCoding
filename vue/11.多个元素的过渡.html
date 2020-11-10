@@ -47,13 +47,13 @@
     <div id="box">
       <button @click="isShow=!isShow">click</button>
 
-      <transition name="kerwinfade">
-        <div v-if="isShow">1111111111111</div>
-      </transition>
-
-
-      <transition name="kerwinbounce">
-        <div v-if="isShow">222222222</div>
+      <!-- <transition name="bounce" mode="in-out">
+        <p v-if="isShow">1111111111111</p>
+        <div v-else>22222</div>
+      </transition> -->
+      <transition name="bounce" mode="out-in">
+        <p v-if="isShow" key="1">1111111111111</p>
+        <p v-else  key="2">22222</p>
       </transition>
     </div>
 
@@ -68,3 +68,4 @@
     </script>
 </body>
 </html>
+<!-- diff算法   对比标签  key不一样-->

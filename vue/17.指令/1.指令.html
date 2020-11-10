@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="box">
+        <!-- 使用
+            v-hello="red"  不加引号就当做一个变量来处理的
+
+        -->
+        <div v-hello="'red'">111</div>
+        <div v-hello="'yellow'">22</div>
+        <div v-hello="mycolor">33333</div>
+    </div>
+    <script type="text/javascript">
+    // 1创建一个指令 l
+        Vue.directive("hello",{
+            // 指令的生命周期----创建阶段
+            inserted(el,bind){
+                // console.log("当前节点插入到父节点中了");
+                console.log("当前节点插入到父节点中了",el,bind);
+                // el.style.background = "red"
+                el.style.background = bind.value
+            },
+            // 指令的生命周期----更新阶段
+            updated(el,bind) {
+                el.style.background = bind.value
+            },
+        })
+        new Vue({
+            el:"#box",
+            data() {
+                return {
+                    // 如果想要跟 切换true 或者false 那样的思想，把pink 换个颜色比如blue ,效果实现不了
+                    mycolor:"pink"
+                }
+            },
+        })
+    </script>
+</body>
+</html>
+<!--#自定义指令
+
+    第一个参数： 能让你拿到深层的DOM结构，  如21行代码，打印出来的是 <di>33333</div>
+    第二个参数，是一个对象，可以拿到value值
+
+    * 如果想要跟 切换true 或者false 那样的思想，把pink 换个颜色比如blue ,效果实现不了
+        ** 原因是 inserted 是指令的生命周期，他只执行一次 用updated生命周期
+
+
+
+
+ -->

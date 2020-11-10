@@ -1,0 +1,34 @@
+{
+    "coming":[],
+    "movieIds":[1339160,342574,1212263,1328712,1240838,1203282,1285581,1216140,1331267,1358968,1217123,1211269,1205905,1280615,1282811,1225854,1290049,1247810,1284957,1217249,1266089,1241850,1216053,1300031,1301793,625632,1263312,1212838,1297973,1368394,1330566,1217400,1336825,1242224,346210,1225578,1215685,1368406,367835,1299776,1331634,1262874,1368593,1254551,1278229,1359317,1331636,1263349,1254576],
+    "stid":"576591972453269000",
+    "stids":[
+        {"movieId":1339160,"stid":"576591972453269000_a1339160_c0"},
+        {"movieId":342574,"stid":"576591972453269000_a342574_c1"},
+        {"movieId":1212263,"stid":"576591972453269000_a1212263_c2"},
+        {"movieId":1328712,"stid":"576591972453269000_a1328712_c3"},
+        {"movieId":1240838,"stid":"576591972453269000_a1240838_c4"},
+        {"movieId":1203282,"stid":"576591972453269000_a1203282_c5"},
+        {"movieId":1285581,"stid":"576591972453269000_a1285581_c6"},
+        {"movieId":1216140,"stid":"576591972453269000_a1216140_c7"},
+        {"movieId":1331267,"stid":"576591972453269000_a1331267_c8"},
+        {"movieId":1358968,"stid":"576591972453269000_a1358968_c9"},
+        {"movieId":1217123,"stid":"576591972453269000_a1217123_c10"},
+        {"movieId":1211269,"stid":"576591972453269000_a1211269_c11"}
+    ],
+    "total":49,
+    "movieList":[
+        {"id":1339160,"haspromotionTag":false,"img":"http://p1.meituan.net/w.h/moviemachine/5cbf9a626b7ed27c96ca3c748655b3ec2550103.jpg","version":"v2d imax","nm":"金刚川","preShow":false,"sc":9.4,"globalReleased":true,"wish":123315,"star":"张译,吴京,李九霄","rt":"2020-10-23","showInfo":"今天116家影院放映1120场","showst":3,"wishst":0},
+        {"id":342574,"haspromotionTag":false,"img":"http://p1.meituan.net/w.h/movie/e99458a34ee7845d7bc90b71b5b86cbf3364271.jpg","version":"","nm":"地狱男爵：血皇后崛起","preShow":false,"sc":7.9,"globalReleased":true,"wish":64511,"star":"大卫·哈伯,米拉·乔沃维奇,伊恩·麦柯肖恩","rt":"2020-11-09","showInfo":"今天115家影院放映1185场","showst":3,"wishst":0},
+        {"id":1212263,"haspromotionTag":false,"img":"http://p0.meituan.net/w.h/movie/b905c2994092ec14f9f8fe8318e1e612180619.jpg","version":"","nm":"风平浪静","preShow":false,"sc":8.1,"globalReleased":true,"wish":39318,"star":"章宇,宋佳,王砚辉","rt":"2020-11-06","showInfo":"今天114家影院放映711场","showst":3,"wishst":0},
+        {"id":1328712,"haspromotionTag":false,"img":"http://p0.meituan.net/w.h/movie/202ea88abd2abf2aa1964487d61edab64556414.jpg","version":"v2d imax","nm":"我和我的家乡","preShow":false,"sc":9.2,"globalReleased":true,"wish":442858,"star":"葛优,黄渤,范伟","rt":"2020-10-01","showInfo":"今天111家影院放映431场","showst":3,"wishst":0},
+        {"id":1240838,"haspromotionTag":false,"img":"http://p0.meituan.net/w.h/movie/73ea2074775b537a3120c0530e966ccd157151.jpg","version":"","nm":"除暴","preShow":true,"sc":0,"globalReleased":false,"wish":48897,"star":"王千源,吴彦祖,春夏","rt":"2020-11-20","showInfo":"2020-11-20 下周五上映","showst":4,"wishst":0},
+        {"id":1203282,"haspromotionTag":false,"img":"http://p0.meituan.net/w.h/moviemachine/fb12bbfce159e60a61e20b804ad9c3cc66302.jpg","version":"","nm":"热血合唱团","preShow":false,"sc":0,"globalReleased":false,"wish":6509,"star":"刘德华,卢冠廷,雷颂德","rt":"2020-11-13","showInfo":"2020-11-13 本周五上映","showst":4,"wishst":0},
+        {"id":1285581,"haspromotionTag":false,"img":"http://p0.meituan.net/w.h/movie/34ffd6e8f0119b362b5862521c296ecd5010552.jpg","version":"","nm":"数码宝贝：最后的进化","preShow":false,"sc":8.7,"globalReleased":true,"wish":159825,"star":"花江夏树,细谷佳正,三森铃子","rt":"2020-10-30","showInfo":"今天82家影院放映202场","showst":3,"wishst":0},
+        {"id":1216140,"haspromotionTag":false,"img":"http://p1.meituan.net/w.h/moviemachine/7a37e1d83cde9deee50d166a403132a92159417.jpg","version":"v2d imax","nm":"热气球飞行家","preShow":false,"sc":0,"globalReleased":false,"wish":2911,"star":"埃迪·雷德梅恩,菲丽希缇·琼斯,丹尼尔·威尔逊","rt":"2020-11-13","showInfo":"2020-11-13 本周五上映","showst":4,"wishst":0},
+        {"id":1331267,"haspromotionTag":false,"img":"http://p1.meituan.net/w.h/movie/c16b0a68f95d884d428f339f8eacce834410200.jpg","version":"","nm":"一点就到家","preShow":false,"sc":9.2,"globalReleased":true,"wish":47506,"star":"刘昊然,彭昱畅,尹昉","rt":"2020-10-04","showInfo":"今天59家影院放映122场","showst":3,"wishst":0},
+        {"id":1358968,"haspromotionTag":false,"img":"http://p0.meituan.net/w.h/movie/d33858dbfc207da3b36c0dc7fff7a8bb2028677.jpg","version":"","nm":"汪汪队立大功之超能救援","preShow":false,"sc":0,"globalReleased":false,"wish":22566,"star":"杨鸥,韩娇娇,李敏妍","rt":"2020-11-13","showInfo":"2020-11-13 本周五上映","showst":4,"wishst":0},
+        {"id":1217123,"haspromotionTag":false,"img":"http://p0.meituan.net/w.h/movie/e7185e149d79e72c4ef0d70f27fc76da1642784.jpg","version":"v2d imax","nm":"夺冠","preShow":false,"sc":9.1,"globalReleased":true,"wish":513671,"star":"巩俐,黄渤,吴刚","rt":"2020-09-25","showInfo":"今天52家影院放映88场","showst":3,"wishst":0},
+        {"id":1211269,"haspromotionTag":false,"img":"http://p0.meituan.net/w.h/movie/e00977359c9718949a7d1fff69f5baeb3782915.jpg","version":"v3d imax","nm":"姜子牙","preShow":false,"sc":8.3,"globalReleased":true,"wish":1425171,"star":"郑希,杨凝,图特哈蒙","rt":"2020-10-01","showInfo":"今天36家影院放映59场","showst":3,"wishst":0}
+    ]
+}

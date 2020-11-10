@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="swiper/css/swiper.css">
+    <script src="swiper/js/swiper.js"></script>
+    <script src="vue.js"></script>
+    <style>
+        .swiper-container{
+            height:300px;
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!-- key  会导致diff算法更新-->
+        <swiper :key="dataList.length">
+            <div class="swiper-slide" v-for="data in dataList">{{data}}</div>
+        </swiper>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+    Vue.component("swiper",{
+        template:`
+            <div class="swiper-container a">
+                <div class="swiper-wrapper">
+                    <slot></slot>
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+
+                <!-- 如果需要导航按钮 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+                <!-- 如果需要滚动条 -->
+                <div class="swiper-scrollbar"></div>
+            </div>`,
+            mounted() {
+                console.log("swiper=mounted");
+                // swiper初始化放到哪里很重要
+                new Swiper ('.a',{
+                    // direction: 'vertical'
+                    loop:true,
+                        // 如果需要分页器
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+
+                    autoplay: {
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    },
+
+
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                })
+            },
+            // 每次状态改变就需要触发这个钩子函数
+            update(){},
+    })
+    new Vue({
+        el:"#box",
+        data() {
+            return {
+                dataList:[],
+            }
+        },
+        // 当所有的数据以及他的孩子也结束了，加载了挂载到DOM 了 他才执行
+        mounted() {
+            // 这里模拟数据请求
+            setTimeout(()=>{
+                console.log("root=mounted");
+                this.dataList = ["111","222","3333"];
+            },2000)
+        },
+    })
+</script>
+<!-- 如果用mounted 的话，都二次更新了就没办法走mounted了（因为mounted之支触发一次）
+    要是能在更新状态的时候让mounted在更新一次
+    此刻diff 算法的原理就很重要
+-->
