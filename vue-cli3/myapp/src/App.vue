@@ -1,30 +1,52 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    hellow vue
+    <input type="text" ref="mytext">
+    <button @click="handleAdd()">按钮</button>
+    <ul>
+      <li v-for="data in dataList" :key="data">{{data}}</li>
+    </ul>
+    <nav-bar></nav-bar>
+    <side-bar></side-bar>
   </div>
-  <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+// commonJS  module.exports
+import navBar from './components/navBar'
+import sideBar from './components/sideBar'
 
-#nav {
-  padding: 30px;
+// es6d 导出
+export default {
+  setup () {
+    return {
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
     }
   }
+  // name: 'App',
+  // data () {
+  //   return {
+  //     dataList: []
+  //   }
+  // },
+  // components: {
+  //   navBar,
+  //   sideBar
+  // },
+  // methods: {
+  //   handleAdd () {
+  //     // console.log('aaaa', this.$refs.mytext.value)
+  //     this.dataList.push(this.$refs.mytext.value)
+  //   }
+  // }
 }
+</script>
+
+<style lang="scss" scoped>
+  ul{
+    li{
+      background:yellow;
+    }
+  }
+
 </style>
