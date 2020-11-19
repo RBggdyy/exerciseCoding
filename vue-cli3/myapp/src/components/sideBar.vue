@@ -1,5 +1,20 @@
 <template>
-    <div>
+    <aside>
         sidebar
-    </div>
+        <ul>
+            <li>1111</li>
+            <li>1111</li>
+            <li>1111</li>
+            <li>1111</li>
+        </ul>
+    </aside>
 </template>
+
+<style lang="scss" scoped>
+  ul{
+    li{
+      background:blue;
+    }
+  }
+
+</style>
