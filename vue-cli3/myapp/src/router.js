@@ -3,6 +3,7 @@ import Router from 'vue-router' // 2引入下载的路由
 import Film from '@/views/Film'
 import Nowplaying from '@/views/Film/Nowplaying'
 import Comingsoon from '@/views/Film/Comingsoon'
+import Detail from '@/views/Film/Detail'
 import Cinema from '@/views/Cinema'
 import Center from '@/views/Center'
 
@@ -38,6 +39,10 @@ export default new Router({
         {
           path: 'comingsoon',
           component: Comingsoon
+        },
+        {
+          path: '',
+          redirect: '/film/nowplaying'
         }
       ]
     },
@@ -48,6 +53,10 @@ export default new Router({
     {
       path: '/center',
       component: Center
+    },
+    {
+      path: '/detail/:myid', // detail/aa 动态路由
+      component: Detail
     },
     {
       path: '*',

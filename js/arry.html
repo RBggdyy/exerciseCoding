@@ -5,6 +5,7 @@
 		<title></title>
 	</head>
 	<body>
+		<span class="add"></span>
 	</body>
 </html>
 <script type="text/javascript">
@@ -161,20 +162,50 @@
 	/*
     	* 生成两个整数之间的随机整数，并且要包含这两个整数
     */
-    function getRandom(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    // function getRandom(min, max) {
+    //     return Math.floor(Math.random() * (max - min + 1)) + min;
+    // }
 
-    console.log(getRandom(1, 10));
-    /*
-    * 生成两个整数之间的随机整数，并且要包含这两个整数
-    */
-    function getRandom(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    // console.log(getRandom(1, 10));
+    // /*
+    // * 生成两个整数之间的随机整数，并且要包含这两个整数
+    // */
+    // function getRandom(min, max) {
+    //     return Math.floor(Math.random() * (max - min + 1)) + min;
+    // }
 
-    const arr = ['许嵩', '邓紫棋', '毛不易', '解忧邵帅'];
-    const index = getRandom(0, arr.length - 1); // 生成随机的index
-	console.log(index)
-    console.log(arr[index]); // 随机点名
+    // const arr = ['许嵩', '邓紫棋', '毛不易', '解忧邵帅'];
+    // const index = getRandom(0, arr.length - 1); // 生成随机的index
+	// console.log(index)
+	// console.log(arr[index]); // 随机点名
+
+	// function changeNameFunc(name) {
+	// 	let arr = name.split('');
+	// 	arr.map((item,index)=>{
+	// 		if(item == '_') {
+	// 			arr[index+1] = arr[index+1].toUpperCase()
+	// 		}
+	// 	})
+	// 	return arr.join('')
+	// }
+	// let name = changeNameFunc('arr_data');
+	// 用js递归的方式写1到100求和？
+	function sumFunc(num, start) {
+		num += start
+		start++;
+		if (start > 100) {
+			console.log(num);
+			return num
+		}
+		else {
+			sumFunc(num, start)
+		}
+	}
+	sumFunc(0, 1);
 </script>
+<style>
+	.add{
+		height: 1px;
+		transform: scale(0.5);
+	}
+</style>
