@@ -1,6 +1,7 @@
 <template>
     <div>
        detail
+       传递来的数据是： {{ $route.params.myid }}
     </div>
 </template>
 <script>
