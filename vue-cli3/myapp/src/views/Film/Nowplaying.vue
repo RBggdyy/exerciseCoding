@@ -26,10 +26,6 @@ export default {
     }
   },
   mounted () {
-    // axios.get('https://m.maizuo.com/gateway?cityId=110100&pageNum=1&pageSize=10&type=1&k=1041776')
-    //   .then((res) => {
-    //     console.log(res.data, '00000')
-    //   })
     axios({
       url: 'https://m.maizuo.com/gateway?cityId=110100&pageNum=1&pageSize=10&type=1&k=1300440',
       headers: {
@@ -37,7 +33,7 @@ export default {
         'X-Host': 'mall.film-ticket.film.list'
       }
     }).then(res => {
-      console.log(res.data, '00000')
+      // console.log(res.data, '00000')
       this.datalist = res.data.data.films
     })
   },
@@ -63,6 +59,7 @@ export default {
 -->
 <style lang="scss" scoped>
   ul{
+    margin-bottom: 50px;
     li{
       padding: 10px;
       overflow: hidden;//清除浮动

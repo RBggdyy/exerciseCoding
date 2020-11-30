@@ -1,7 +1,7 @@
 <template>
-    <div class="swiper-container">
-        <div class="swiper-wrapper filmswiper">
-            <!-- <div class="swiper-slide" v-for="data in dataList">{{data}}</div> -->
+   <div class="swiper-container filmswiper">
+        <div class="swiper-wrapper">
+            <slot></slot>
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
@@ -15,26 +15,41 @@
     </div>
 </template>
 <script>
-// import Swiper from 'swiper'
+import Swiper, { Pagination, Navigation, Autoplay } from 'swiper' // js 模块
+import 'swiper/swiper-bundle.css' // css 模块
+Swiper.use([Pagination, Navigation, Autoplay])
+
 export default {
   mounted () {
-    //     new Swiper('.filmswiper', {
-    //       // direction: 'vertical'
-    //       loop: true,
-    //       // 如果需要分页器
-    //       pagination: {
-    //         el: '.swiper-pagination'
-    //       },
+    // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars
+    let swiper = new Swiper('.filmswiper', {
+      // direction: 'vertical',
+      loop: true,
+      centeredSlides: true,
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true // 允许分页点击跳转
+      },
 
-    //       autoplay: {
-    //         delay: 2500,
-    //         disableOnInteraction: false
-    //       },
-    //       navigation: {
-    //         nextEl: '.swiper-button-next',
-    //         prevEl: '.swiper-button-prev'
-    //       }
-    //     })
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false
+      },
+
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    })
   }
 }
 </script>
+<style scoped>
+ .swiper-container {
+      width: 100%;
+      height: 200px;
+      margin: auto;
+  }
+</style>
