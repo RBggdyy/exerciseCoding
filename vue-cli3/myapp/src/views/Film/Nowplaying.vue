@@ -2,7 +2,7 @@
     <div>
        nowplaying
        <ul>
-            <li v-for="data in datalist" :key="data.filmId" @click="handleChnagePage(data)">
+            <li v-for="data in datalist" :key="data.filmId" @click="handleChnagePage(data.filmId)">
               <img :src="data.poster">
               <h3> {{data.name}}</h3>
               <p>观众评分：{{data.grade}}</p>
@@ -33,7 +33,7 @@ export default {
         'X-Host': 'mall.film-ticket.film.list'
       }
     }).then(res => {
-      // console.log(res.data, '00000')
+      console.log(res.data, '00000')
       this.datalist = res.data.data.films
     })
   },

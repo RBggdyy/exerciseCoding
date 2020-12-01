@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <ul>
+    <div class="tabbar">
+        <ul class="tabbar-ul">
             <router-link to="/film" tag="li" activeClass="myactive">
                 <i class="iconfont icon-form"></i>
                 film
@@ -23,15 +23,16 @@
     .myactive{
         color: red;
     }
-    div{
+    .tabbar{
         position: fixed;
-        bottom: 0px;
+        bottom: -1px;
         left: 0px;
         width: 100%;
         height: 50px;
         background: #fff;
         border-top:1px solid gray;
-        ul{
+        z-index: 9;
+        .tabbar-ul{
             display: flex;
             li{
                 flex: 1;

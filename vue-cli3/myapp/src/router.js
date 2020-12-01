@@ -3,7 +3,7 @@ import Router from 'vue-router' // 2引入下载的路由
 import Film from '@/views/Film'
 import Nowplaying from '@/views/Film/Nowplaying'
 import Comingsoon from '@/views/Film/Comingsoon'
-import Detail from '@/views/Film/Detail'
+import Detail from '@/views/Detail'
 import Cinema from '@/views/Cinema'
 import Center from '@/views/Center'
 import Login from '@/views/Login'

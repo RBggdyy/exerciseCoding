@@ -39,8 +39,12 @@ export default {
         console.log(err)
       })
 
-    // 监听滚动事件
+    // 监听滚动事件全局的（任何页面都会触发这个方法）
     window.onscroll = this.handleScroll
+  },
+  // 不影响其他组件要离开的时候解绑
+  beforeDestroy () {
+    window.onscroll = null
   },
 
   methods: {
@@ -53,8 +57,8 @@ export default {
                 * vue中用ref 挂在到普通节点拿到的是原生DOM  挂在到组件上拿到的是对象
         ** 怎么给组件动态的增加class   数组  三目  对象
       */
-      console.log(document.documentElement.scrollTop, this.$refs.myswiper.$el.offsetHeight)
-      if (document.documentElement.scrollTop >= this.$refs.myswiper.$el.offsetHeight) {
+      // console.log(document.documentElement.scrollTop, this.$refs.myswiper.$el.offsetHeight)
+      if ((document.documentElement.scrollTop || document.documentElement.scrollTop) >= this.$refs.myswiper.$el.offsetHeight) {
         // console.log('fixed')
         this.isfixed = true
       } else {
