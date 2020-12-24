@@ -1,11 +1,26 @@
 <template>
 <!-- v-if="filminfo 解决初次渲染的时候 赋值的报错 -->
-    <div v-if="filminfo" style="background:#f2f2f2;height:100%;width:100%;margin-bottom:60px;">
+    <div v-if="filminfo" style="background:#f2f2f2;height:100%;width:100%;margin-bottom:40px;">
        <!--1//// detail
        传递来的数据是： {{ $route.params.myid }}
        传递来的数据是1： {{myid}} -->
-        <div style="background:#fff;padding:20px;">
-            <img :src="filminfo.poster" alt="" class="filminfo">
+        <div style="background:#fff;">
+            <div :class="isfixed ? 'show-film-header film-header' : 'film-header'" @click="()=>this.$router.go(-1)">
+              <div class="goBack">
+                <i class="iconfont icon-back"></i>
+              </div>
+              <div class="title" v-if="isfixed" >
+                <div class="goBack1" @click="()=>this.$router.go(-1)">
+                  <i class="iconfont icon-back"></i>
+                </div>
+                {{filminfo.name}}
+              </div>
+              <span class="after"></span>
+            </div>
+            <div class="filminfo">
+               <img :src="filminfo.poster" alt="" >
+            </div>
+            <div style="padding:20px;">
               <div class="title">
                 <div class="title-content">
                   <span>{{filminfo.name}}</span>
@@ -13,11 +28,12 @@
                 </div>
                 <span>{{filminfo.grade}}分</span>
               </div>
-            <p class="detail">{{filminfo.category}}</p>
-            <p class="detail">{{filminfo.nation}}|{{filminfo.runtime}}分钟</p>
-            <div class="detail hidde grey-text" v-if="isFold">{{filminfo.synopsis}}</div>
-            <div class="detail grey-text" v-else>{{filminfo.synopsis}}</div>
-            <i :class="isFold ? 'iconfont icon-moreunfold' : 'iconfont icon-less'" @click="handlefold"></i>
+              <p class="detail">{{filminfo.category}}</p>
+              <p class="detail">{{filminfo.nation}}|{{filminfo.runtime}}分钟</p>
+              <div class="detail hidde grey-text " v-if="isFold">{{filminfo.synopsis}}</div>
+              <div class="detail grey-text film-synopsis" v-else style='height:114px;'>{{filminfo.synopsis}}</div>
+              <i :class="isFold ? 'iconfont icon-moreunfold' : 'iconfont icon-less'" @click="handlefold"></i>
+            </div>
         </div>
         <div class="actor-detail">
             <span class="actor-detail-span">演职人员</span>
@@ -46,7 +62,7 @@
             <span class="actor-detail-span">剧照</span>
             <span>全部(5)<i class="iconfont icon-more"></i></span>
           </div>
-          <swiper  perview="3"  class="photoswiper" myclassname="photoswiper">
+          <swiper  perview="2"  class="photoswiper" myclassname="photoswiper">
             <div v-for="(data,index) in filminfo.photos" :key="index" class='swiper-slide' >
               <img :src="data" alt="" class="row-scroll-jzimg" >
             </div>
@@ -57,6 +73,7 @@
 <script>
 import axios from 'axios'
 import swiper from '@/views/Detail/DatailSwiper'
+// import bus from '@/bus'
 export default {
   props: ['myid'],
   components: {
@@ -65,7 +82,8 @@ export default {
   data () {
     return {
       filminfo: null,
-      isFold: true
+      isFold: true,
+      isfixed: false
     }
   },
   // directives: {
@@ -75,12 +93,19 @@ export default {
   //     }
   //   }
   // },
-
+  beforeMount () {
+    // this.$store.state.isTabberFlag = false // 这种写法不规范
+    this.$store.commit('Hidetabbar', false) // 第一个参数的就是mutation的名字
+    // 刷新了以后这个功能不起作用，原因是这里先走了，先订阅了，所有刷新后功能失效
+    // console.log('hidetabbar', '发消息了')
+    // bus.$emit('maizuo', false)
+  },
   mounted () {
     // this.$refs.inputs.$el.focus()
-    console.log(this.$refs, 'this.$refs')
+    window.onscroll = this.handleScroll
+    // console.log(this.$refs, 'this.$refs')
     // 1.console.log(this.$route, '要id获取详情信息')
-    console.log(this.$route.params.myid, '要id获取详情信息', '或者', this.myid)
+    // console.log(this.$route.params.myid, '要id获取详情信息', '或者', this.myid)
     axios({
       url: `https://m.maizuo.com/gateway?filmId=${this.$route.params.myid}&k=5307148`,
       headers: {
@@ -88,26 +113,64 @@ export default {
         'X-Host': 'mall.film-ticket.film.info'
       }
     }).then(res => {
-      console.log(res.data.data.film, '444444')
+      // console.log(res.data.data.film, '444444')
       this.filminfo = res.data.data.film
     }).catch(err => {
       console.log(err)
     })
   },
 
+  beforeDestroy () {
+    window.onscroll = null
+    // console.log('showTabbar')
+    // bus.$emit('maizuo', true)
+    // this.$store.state.isTabberFlag = true
+    this.$store.commit('Showtabbar', true) // 第一个参数的就是mutation的名字!
+
+  },
+
   methods: {
     handlefold () {
       this.isFold = !this.isFold
+    },
+    handleScroll () {
+      /* 吸顶效果逻辑:当滚动条滚动一定的距离例如（轮播图）的时候写个加一个class  滚回来删除那个class
+        ** 如果滚动距离大于等于轮播的高度 fixed  小于 unfixed
+          1.滚动距离怎么获取(document.documentElement.scrollTop)  *操作原生*
+          2.轮播图高度怎么动态获取(this.$refs.myswiper.$el.offsetHeight)
+                * 原生做法 给dom 起个id 获取到dom  隐藏实力 不能让人家知道你会原生
+                * vue中用ref 挂在到普通节点拿到的是原生DOM  挂在到组件上拿到的是对象
+        ** 怎么给组件动态的增加class   数组  三目  对象
+      */
+      // console.log(document.documentElement.scrollTop)
+      if ((document.documentElement.scrollTop || document.documentElement.scrollTop) >= 44) {
+        // console.log('fixed')
+        this.isfixed = true
+      } else {
+        // console.log('unfixed')
+        this.isfixed = false
+      }
     }
   }
 }
+/*
+需要解决非父子之间的通信 可以用事件总线先订阅 在接收【适用通讯少】
+vuex 适用 【通讯多】
+
+*/
 </script>
 <!-- 跳转后怎么知道展示那个页面的信息--->
 <style lang="scss" scoped>
 .filminfo{
-  // width: 100%;
-  height: 140px;
+  height: 56vw;
   overflow: hidden;
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 100%;
+  }
 }
 .title{
   display: flex;
@@ -148,10 +211,14 @@ export default {
   margin-top: 4px;
 }
 .hidde{
-  height: 39px !important;
+  height: 39px!important;
   overflow: hidden;
-  margin-top: 12px !important;
+  // margin-top: 12px !important;
   text-align: left;
+}
+.film-synopsis{
+  // height: 114px;
+  // height: 114px;
 }
 .actor-detail{
   background: #fff;
@@ -160,11 +227,17 @@ export default {
   width: 100%;
 }
 .icon-moreunfold,.icon-less{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 4px;
+  // width: 100%;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // margin-top: 4px;
+    text-align: center;
+    display: block;
+    height: auto;
+    width: 20px;
+    margin: auto;
+    line-height: normal;
 }
 .grey-text{
   transition: height .5s ease;
@@ -179,48 +252,8 @@ export default {
   color: #191a1b;
   margin: 10px 20px;
 }
-
-// .row-scroll{
-//   // height: 140px;
-//   margin: 10px 20px;
-//   overflow-x: auto;
-//   overflow-y: hidden;
-//   background-color: #fff;
-//   .row-scroll-items{
-//     display: flex;
-//     align-items: center;
-//     justify-content: flex-start;
-//     width: 100%;
-//     list-style: none;
-//     .row-scroll-img{
-//       width:100px;
-//       height: 100px;
-//       display: block;
-//     }
-//     .row-scroll-li{
-//        margin: 0 10px;
-//     }
-//     .actors-name{
-//       display: block;
-//       text-align: center;
-//       padding-top: 10px;
-//       font-size: 12px;
-//       color: #191a1b;
-//       width: 85px;
-//       height: 18px;
-//       overflow: hidden;
-//       -o-text-overflow: ellipsis;
-//       text-overflow: ellipsis;
-//       white-space: nowrap;
-//     }
-//     .row-scroll-li>.actorName {
-//        padding-top: 0px!important;
-//     }
-//   }
-// }
  .row-scroll-img{
-    // width:100%;
-    height: 100px;
+    width:100%;
     display: block;
   }
   .actors-name{
@@ -249,19 +282,62 @@ export default {
   }
   .actor-detail-title span:nth-child(2) {
     padding-right: 20px;
+    display: flex;
+    align-items: center;
   }
-  // .lazy-img{
-    // width: 150px;
-    // height: 63px;
-    // background: rgb(249, 249, 249);
-    // opacity: 1;
-    // display: block;
-    // overflow: hidden;
-  // }
-  // .row-scroll-jzimg{
-  //   width: 150px;
-  //   // height: 100px;
-  //   display: block;
-  //   overflow: hidden;
-  // }
+  .row-scroll-jzimg{
+    width: 94%;
+    // height: 100px;
+    display: block;
+    overflow: hidden;
+  }
+  .film-header{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: hsla(0,0%,100%,0);
+    transition: all .3s ease;
+    width: 100vw;
+    height: 44px;
+    z-index: 1;
+    .goBack{
+        font-size: 30px;
+        position: absolute;
+        top: 5px;
+        left: 15px;
+        color: #fff;
+      }
+      .icon-back {
+          width: 30px;
+          line-height: 44px;
+      }
+    .title {
+      font-size: 17px;
+      line-height: 44px;
+      width: 100vw;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  .show-film-header{
+    transition: all .3s ease;
+    background-color: #fff;
+    color: #191a1b;
+    width: 100vw;
+    height: 44px;
+    z-index: 1;
+    position: fixed;
+    border-bottom:1px solid gray;
+  }
+  .goBack1{
+    font-size: 30px;
+    position: absolute;
+    left: 15px;
+    color: gray;
+  }
+  .icon-back {
+      width: 30px;
+      line-height: 44px;
+  }
 </style>

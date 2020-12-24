@@ -44,8 +44,8 @@ export default {
       //     prevEl: '.swiper-button-prev'
       //   }
       slidesPerView: this.perview,
-      spaceBetween: this.myclassname === 'actorswiper' ? 20 : 10,
-      freeMode: true,
+      spaceBetween: this.myclassname === 'actorswiper' ? 10 : 0,
+      freeMode: true
     //   centeredSlides: true
     })
   }
@@ -54,7 +54,7 @@ export default {
 <style scoped>
  .swiper-container {
       width: 100%;
-      /* height: 200px; */
-      /* margin: auto; */
+      height: 200px;
+      margin: auto;
   }
 </style>

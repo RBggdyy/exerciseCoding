@@ -33,13 +33,13 @@ export default {
         'X-Host': 'mall.film-ticket.film.list'
       }
     }).then(res => {
-      console.log(res.data, '00000')
+      // console.log(res.data, '00000')
       this.datalist = res.data.data.films
     })
   },
   methods: {
     handleChnagePage (id) {
-      console.log(id)
+      // console.log(id)
       //   1.编程式导航 通过路径跳转
       // this.$router.push({
       //   path: `/detail/${id}`

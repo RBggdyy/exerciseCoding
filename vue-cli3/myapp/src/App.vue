@@ -2,8 +2,11 @@
   <div>
     <!-- hellow vue -->
     <!-- 路由容器 -->
-    <router-view></router-view>
-    <tabbar></tabbar>
+    <!-- <tabbar  v-if="flag"></tabbar> -->
+    <tabbar  v-if="this.$store.state.isTabberFlag"></tabbar>
+    <section>
+        <router-view></router-view>
+    </section>
     <!-- <input type="text" ref="mytext">
     <button @click="handleAdd()">按钮</button>
     <ul>
@@ -22,13 +25,15 @@
 // import sideBar from './components/sideBar'
 import tabbar from './components/Tabbar'
 import axios from 'axios'
+// import bus from '@/bus'
 // es6d 导出
 export default {
   name: 'App',
   data () {
     return {
       dataList: [],
-      isShow: false
+      isShow: false,
+      flag: true
     }
   },
   components: {
@@ -36,6 +41,12 @@ export default {
     // sideBar,
     tabbar
   },
+  // beforeMount () {
+  //   bus.$on('maizuo', (data) => {
+  //     console.log('被通知maizuo从这里开始订阅消息了', data)
+  //     this.flag = data
+  //   })
+  // },
   mounted () {
     axios.get('/ajax/movieOnInfoList?token=&optimus_uuid=AF8606A024BC11EB8755BB32EBDD94CEA8B54616607E46D3ABE5B7DACE81644D&optimus_risk_level=71&optimus_code=10')
       .then(res => {
@@ -54,22 +65,10 @@ export default {
 </script>
 
 <style lang="scss" >
-// // 当前样式只影响自己，别人的样式也别影响我  加scoped
-//   ul{
-//     li{
-//       background:yellow;
-//     }
-//   }
-// *{
-//   margin:0;
-//   padding:0;
-// }
+// 当前样式只影响自己，别人的样式也别影响我  加scoped
 html{
   height: 100%;
 }
-// li{
-//   list-style: none;
-// }
 // ==================
 body{
     line-height:1.4;

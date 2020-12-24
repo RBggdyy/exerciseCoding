@@ -33,7 +33,7 @@ export default {
   mounted () {
     axios.get('/ajax/movieOnInfoList?token=&optimus_uuid=AF8606A024BC11EB8755BB32EBDD94CEA8B54616607E46D3ABE5B7DACE81644D&optimus_risk_level=71&optimus_code=10')
       .then(res => {
-        console.log(res.data, '00000')
+        // console.log(res.data, '00000')
         this.loopList = res.data.movieList
       }).catch(err => {
         console.log(err)
