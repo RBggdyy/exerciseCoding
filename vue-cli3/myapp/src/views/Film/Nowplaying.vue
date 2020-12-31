@@ -70,3 +70,20 @@ export default {
     }
   }
 </style>
+<!--所有的异步需要在action 中====》mutation 中======》store
+ 1.判断store中有没有 nowpalying 的数据
+ 没有 ajax(action==>mutation ==> state)
+ 2.有数据，直接就从store 取数据 渲染页面
+
+vuex :
+1.状态管理，实现非父子通信
+2.数据快照 缓存数据到store 中 减少重复的请求
+3.方便调试，实现时光旅行
+
+同步的话commit 到mutation 中就可以直接修改数据了。
+如果需要异步请求数据的话需用action做后端数据的缓存
+缓存就是缓存到内存中，只要不刷新浏览器，
+如果刷新浏览器的话浏览器会先把内存释放掉，然后再来加载数据。那么，数据就会丢失。
+同步：直接commit 到mutations 中就可修改
+异步：
+-->

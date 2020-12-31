@@ -96,6 +96,7 @@ export default {
   beforeMount () {
     // this.$store.state.isTabberFlag = false // 这种写法不规范
     this.$store.commit('Hidetabbar', false) // 第一个参数的就是mutation的名字
+
     // 刷新了以后这个功能不起作用，原因是这里先走了，先订阅了，所有刷新后功能失效
     // console.log('hidetabbar', '发消息了')
     // bus.$emit('maizuo', false)
@@ -126,7 +127,6 @@ export default {
     // bus.$emit('maizuo', true)
     // this.$store.state.isTabberFlag = true
     this.$store.commit('Showtabbar', true) // 第一个参数的就是mutation的名字!
-
   },
 
   methods: {
@@ -215,10 +215,6 @@ vuex 适用 【通讯多】
   overflow: hidden;
   // margin-top: 12px !important;
   text-align: left;
-}
-.film-synopsis{
-  // height: 114px;
-  // height: 114px;
 }
 .actor-detail{
   background: #fff;

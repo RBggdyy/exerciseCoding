@@ -3,10 +3,11 @@
     <!-- hellow vue -->
     <!-- 路由容器 -->
     <!-- <tabbar  v-if="flag"></tabbar> -->
-    <tabbar  v-if="this.$store.state.isTabberFlag"></tabbar>
     <section>
         <router-view></router-view>
     </section>
+    <tabbar  v-if="$store.state.isTabberFlag"></tabbar>
+    <!-- <tabbar  v-if="isShow"></tabbar> -->
     <!-- <input type="text" ref="mytext">
     <button @click="handleAdd()">按钮</button>
     <ul>
@@ -25,6 +26,7 @@
 // import sideBar from './components/sideBar'
 import tabbar from './components/Tabbar'
 import axios from 'axios'
+import { mapState } from 'vuex'// es6写法
 // import bus from '@/bus'
 // es6d 导出
 export default {
@@ -32,7 +34,7 @@ export default {
   data () {
     return {
       dataList: [],
-      isShow: false,
+      // isShow: false,
       flag: true
     }
   },
@@ -40,6 +42,17 @@ export default {
     // navBar,
     // sideBar,
     tabbar
+  },
+  // 使用state 的另外写法
+  // computed: {
+  //   isShow () {
+  //     return this.$store.state.isTabberFlag
+  //   }
+  // },
+  // vuex 的另外一种导出的方法
+  // computed: mapState(['isTabberFlag']),
+  computed: {
+    ...mapState(['isTabberFlag'])
   },
   // beforeMount () {
   //   bus.$on('maizuo', (data) => {
@@ -96,6 +109,9 @@ ul,ol{
 /*image with no-border*/
 a img{border:0;}
 img{border:0;}
+section {
+  padding-bottom: 10px;
+}
 </style>
 <!--
 npm run lint  webpack里面的命令 自动修复代码
